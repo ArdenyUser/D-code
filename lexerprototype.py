@@ -3,7 +3,7 @@ class BasicLexer(Lexer):
     tokens = { NAME, NUMBER, STRING }
     ignore = '\t '
     literals = { '=', '+', '-', '/', 
-                '*', '(', ')', ',', ';'}
+                '*', '(', ')', ',', ';', 'print'}
   
   
     # Define tokens as regular expressions
