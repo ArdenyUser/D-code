@@ -1,5 +1,7 @@
 
 data = 0
+lennumber = 0
+letter = 0
 START = ["section .text\n", "   global _start  (ld)\n", "\n", "_start:\n", "   mov edx,len\n", "   mov ecs,msg\n", "   mov ebx,1\n", "   mov eax,4\n", "   int	0x80", "/n", "   mov eax,1/n", "   int 0x80/n", "/n", "section	.data"]
 PRINTA = ["msg db '", data,"', 0xa  ;string to be printed\n", "len equ $ - msg     ;length of the string\n"]
 
@@ -15,7 +17,7 @@ for line in Lines:
     count += 1
     data = .format(count, line.strip())
     if linearprint == 1:
-      PRINT = ["msg db '", data,"', 0xa  ;string to be printed/n", "len equ $ - msg     ;length of the string\n"]
+      PRINT = ["msg db '", data,"', 0xa  ;string to be printed/n", "len" + lennumber " equ $ - msg     ;length of the string\n"]
       file1 = open('compiled.asm', 'a')
       file1.writelines(PRINT)
       file1.close()
@@ -30,16 +32,47 @@ for line in Lines:
           printa = 0
           printb = 0
           printc = 0
+          vara = 0
+          varb = 0
+          varc = 0
+          ifa = 0
+          ifb = 0
+          ifc = 0
+          lennumber = 0
           if printc == 1:
              if letter != ";":
-                putdata = putdata + letter
+                if letter != " ":
+                   putdata = putdata + letter
+             
              else:
+                lennumber = lennumber + 1
                 printc = 0
-                PRINTA = ["msg db '", putdata,"', 0xa  ;string to be printed\n", "len equ $ - msg     ;length of the string\n"]
+                PRINTA = ["msg ", lennumber, " db '", putdata,"', 0xa  ;string to be printed\n", "len " , lennubmer," equ $ - msg     ;length of the string\n"]
                 file1 = open('compiled.asm', 'a')
                 file1.writelines(PRINTA)
                 file1.close()
-          if printc != 1:
+          if ifc == 1:
+             if letter != ";":
+                if letter != " ":
+                   ifdata = ifdata + letter
+             
+             else:
+                lennumber = lennumber + 1
+                printc = 0
+                IFDATAC = ["CMP ", ifdata,"\n"]
+                file1 = open('compiled.asm', 'a')
+                file1.writelines(IFDATAC)
+                file1.close()
+          if varc == 1:
+             if letter != ";":
+                vardata = vardata + letter
+             else:
+                varc = 0
+                lennumber = lennumber + 1
+                file1 = open('compiled.asm', 'a')
+                file1.writelines(varc)
+                file1.close()
+          if printc and varc != 1:
              if letter == "p":
                 printa = 1
              if printa == 1:
@@ -48,6 +81,22 @@ for line in Lines:
              if printb == 1:
                 if letter == "t":
                    printc = 1
+             if letter == "a":
+                vara = 1
+             if vara == 1:
+                if letter == "s":
+                   varb = 1
+             if varb == 1:
+                if letter == "m":
+                   varc = 1
+             if letter == "i":
+                vara = 1
+             if ifa == 1:
+                if letter == "f":
+                   ifb = 1
+             if varb == 1:
+                if letter == "1":
+                   ifc = 1
              
           
                 
