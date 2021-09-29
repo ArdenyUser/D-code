@@ -38,41 +38,104 @@ for line in Lines:
           ifa = 0
           ifb = 0
           ifc = 0
+          jea = 0
+          jeb = 0
+          jec = 0
+          if jec == 1:
+             if letter != ";":
+                vamdata = vamdata + letter
+             else:
+                vamdata = 0
+                printa = 0
+                printb = 0
+                printc = 0
+                vara = 0
+                varb = 0
+                varc = 0
+                ifa = 0
+                ifb = 0
+                ifc = 0
+                jea = 0
+                jeb = 0
+                jec = 0   
+                lennumber = lennumber + 1
+                file1 = open('compiled.asm', 'a')
+                file1.writelines(varc)
+                file1.close()
           lennumber = 0
           if printc == 1:
              if letter != ";":
-                if letter != " ":
-                   putdata = putdata + letter
+                if letter != "_":
+               
+                    putdata = putdata + letter
              
              else:
+                putdata = 0
                 lennumber = lennumber + 1
+                printa = 0
+                printb = 0
                 printc = 0
-                PRINTA = ["msg ", lennumber, " db '", putdata,"', 0xa  ;string to be printed\n", "len " , lennubmer," equ $ - msg     ;length of the string\n"]
+                vara = 0
+                varb = 0
+                varc = 0
+                ifa = 0
+                ifb = 0
+                ifc = 0
+                jea = 0
+                jeb = 0
+                jec = 0
+                printc = 0
+                PRINTA = ["msg", lennumber, " db '", putdata,"', 0xa  ;string to be printed\n", "len " , lennubmer," equ $ - msg     ;length of the string\n"]
                 file1 = open('compiled.asm', 'a')
                 file1.writelines(PRINTA)
                 file1.close()
           if ifc == 1:
              if letter != ";":
-                if letter != " ":
+                if letter != ".":
+                   
                    ifdata = ifdata + letter
              
              else:
+                printa = 0
+                printb = 0
+                printc = 0
+                vara = 0
+                varb = 0
+                varc = 0
+                ifa = 0
+                ifb = 0
+                ifc = 0
+                jea = 0
+                jeb = 0
+                jec = 0
                 lennumber = lennumber + 1
                 printc = 0
-                IFDATAC = ["CMP ", ifdata,"\n"]
+                IFDATAC = ["CMP", ifdata,"\n"]
                 file1 = open('compiled.asm', 'a')
                 file1.writelines(IFDATAC)
                 file1.close()
+          
           if varc == 1:
              if letter != ";":
                 vardata = vardata + letter
              else:
+                printa = 0
+                printb = 0
+                printc = 0
+                vara = 0
+                varb = 0
                 varc = 0
+                ifa = 0
+                ifb = 0
+                ifc = 0
+                jea = 0
+                jeb = 0
+                jec = 0   
                 lennumber = lennumber + 1
                 file1 = open('compiled.asm', 'a')
                 file1.writelines(varc)
                 file1.close()
-          if printc and varc != 1:
+          if printc and varc and jec != 1:
              if letter == "p":
                 printa = 1
              if printa == 1:
@@ -97,6 +160,14 @@ for line in Lines:
              if varb == 1:
                 if letter == "1":
                    ifc = 1
+             if letter == "j":
+                jea = 1
+             if jea == 1:
+                if letter == "i":
+                   jeb = 1
+             if jeb == 1:
+                if letter == "f":
+                   jec = 1
              
           
                 
