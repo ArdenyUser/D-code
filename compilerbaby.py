@@ -1,13 +1,7 @@
 
-# Python code to
-# demonstrate readlines()
+START = ["section .text\n", "   global _start  (ld)\n", "\n", "_start:\n", "   mov edx,len\n", "   mov ecs,msg\n", "   mov ebx,1\n", "   mov eax,4\n", "   int	0x80", "/n", "   mov eax,1/n", "   int 0x80/n", "/n", "section	.data"]
  
-START = ["section .text\n", "   global _start  (ld)\n", "\n", "_start:\n", "   mov edx,len\n", "   mov ecs,msg\n", "   mov ebx,1\n", "   mov eax,4\n", "   int	0x80", "/n", "   mov eax,1", "   int 0x80"]
- 
-# writing to file
-file1 = open('myfile.txt', 'w')
-file1.writelines(L)
-file1.close()
+
  
 # Using readlines()
 file1 = open('myfile.txt', 'r')
